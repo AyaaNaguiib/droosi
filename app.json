@@ -8,6 +8,7 @@
     "scheme": "newsexpo",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
+    "projectId": "ea6bad32-4bb9-480a-9127-0ccec70382fc",
     "ios": {
       "supportsTablet": true
     },
@@ -51,6 +52,7 @@
       "eas": {
         "projectId": "ea6bad32-4bb9-480a-9127-0ccec70382fc"
       }
-    }
+    },
+    "owner": "ayanaguib"
   }
 }
