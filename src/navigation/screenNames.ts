@@ -4,6 +4,7 @@ enum ScreenNames{
      LoginScreen = 'LoginScreen',
      FavArticleScreen = 'FavArticle',
      Login = "Login",
-     MainTabs = "MainTabs"
+     MainTabs = "MainTabs",
+     InstructorDetails = "InstructorDetails"
 }
 export default ScreenNames;

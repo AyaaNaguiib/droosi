@@ -1,8 +1,5 @@
-enum StackNames{
-    AuthStack = 'AuthStack',
-    MainTabs = 'MainTabs',
-    Register = "Register",
-    Login = "Login",
-    LoginScreen = "LoginScreen",
-} 
-export default StackNames;
+export default {
+  LoginScreen: 'Login',
+  MainTabs: 'MainTabs',
+  HomeScreen: 'Home',
+};

@@ -1,19 +1,20 @@
-import { View, Text, Image } from 'react-native';
 import { CommonActions, NavigationProp, useNavigation } from '@react-navigation/native';
 import { Formik } from 'formik';
+import { Image, Text, View } from 'react-native';
 import * as Yup from 'yup';
 import StackNames from '../../navigation/stackNames';
-import { MainStackParamList } from '../../navigation/mainStack';
 import styles from './styles';
-
-import FormInput from '../../components/formInput/FormInput';
-import CustomBtn from '../../components/btn/CustomBtn';
-import React, { useState, useEffect } from 'react';
- import { saveUserData, getUserData } from '../../utils/helpers/storage';
+import { useLogin } from '@/src/utils/helpers/useLogin';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import i18n, { changeAppLanguage } from '../../locals/i18n';
 import Toast from 'react-native-toast-message';
-import { useLogin } from '@/hooks/useLogin';
+import CustomBtn from '../../components/btn/CustomBtn';
+import FormInput from '../../components/formInput/FormInput';
+import i18n, { changeAppLanguage } from '../../locals/i18n';
+import { getUserData, saveUserData } from '../../utils/helpers/storage';
+import { MainStackParamList } from '@/src/navigation/stacks/mainStack';
+import stackNames from '../../navigation/stackNames';
+
 const LoginSchema = Yup.object().shape({
   username: Yup.string()
     .trim()
@@ -31,8 +32,6 @@ export default function LoginScreen() {
 
   const [currentLang, setCurrentLang] = useState(i18n.language);
 
-  
- 
 
   const toggleLanguage = async () => {
     const newLang = currentLang === 'ar' ? 'en' : 'ar';
@@ -54,7 +53,7 @@ export default function LoginScreen() {
         navigation.dispatch(
           CommonActions.reset({
             index:0,
-            routes:[{name: StackNames.MainTabs}]
+            routes:[{name: stackNames.HomeScreen}]
           })
         );
       } catch (err) {
