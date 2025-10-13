@@ -4,7 +4,7 @@ import { Image, Text, View } from 'react-native';
 import * as Yup from 'yup';
 import StackNames from '../../navigation/stackNames';
 import styles from './styles';
-import { useLogin } from '@/src/utils/helpers/useLogin';
+import { useLogin } from '@/hooks/useLogin';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import Toast from 'react-native-toast-message';
