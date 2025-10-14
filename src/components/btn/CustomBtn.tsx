@@ -9,7 +9,8 @@ interface CustomBtnProps {
   loading?: boolean;
   disabled?: boolean;
   children?: ReactNode;
-  style?: StyleProp<ViewStyle>;       
+  style?: StyleProp<ViewStyle>;   
+  textStyle?: StyleProp<TextStyle>;
    
 }
 
@@ -20,6 +21,7 @@ export default function CustomBtn({
   disabled = false,
   children,
   style,
+  textStyle,
 
 }: CustomBtnProps) {
   return (
@@ -29,7 +31,8 @@ export default function CustomBtn({
       disabled={disabled}
       style={[styles.button, disabled ? styles.buttonDisabled : styles.buttonEnabled, style]} 
       contentStyle={[styles.content, ]}
-      labelStyle={[styles.text, ]}
+      labelStyle={[styles.text,textStyle ]}
+       
     >
       {children ?? title}
     </Button>

@@ -73,6 +73,11 @@ export default function LoginScreen() {
 
   return (
     <View style={styles.container}>
+      {/* <View>
+        <Text>
+          ayyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyya
+        </Text>
+      </View> */}
       <View style={{ flexDirection: 'row', justifyContent: 'flex-end', marginBottom: 20 }}>
         <CustomBtn onPress={toggleLanguage}>
           <Image
