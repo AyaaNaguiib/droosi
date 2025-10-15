@@ -1,24 +1,19 @@
 {
   "expo": {
     "name": "Drossi",
-    "slug": "Drossi",
-   // "slug": "newsExpo",
+    "slug": "newsExpo",
     "version": "1.0.0",
     "orientation": "portrait",
-   "icon": "./assets/images/icon.png",
+    "icon": "./assets/images/icon.png",
     "scheme": "newsexpo",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
-    //"projectId": "ea6bad32-4bb9-480a-9127-0ccec70382fc",
     "ios": {
       "supportsTablet": true
     },
     "android": {
       "adaptiveIcon": {
-        "backgroundColor": "#E6F4FE",
-        // "foregroundImage": "./assets/images/android-icon-foreground.png",
-        // "backgroundImage": "./assets/images/android-icon-background.png",
-        // "monochromeImage": "./assets/images/android-icon-monochrome.png"
+        "backgroundColor": "#E6F4FE"
       },
       "edgeToEdgeEnabled": true,
       "predictiveBackGestureEnabled": false,
@@ -33,7 +28,7 @@
       [
         "expo-splash-screen",
         {
-          "image": "./assets/images/drossiIcon.png",
+          "image": "./assets/images/icon.png",
           "imageWidth": 200,
           "resizeMode": "contain",
           "backgroundColor": "#ffffff",
@@ -43,7 +38,15 @@
         }
       ],
       "expo-localization",
-      "expo-font"
+      "expo-font",
+      [
+        "expo-build-properties",
+        {
+          "android": {
+            "minSdkVersion": 28
+          }
+        }
+      ]
     ],
     "experiments": {
       "typedRoutes": true,
