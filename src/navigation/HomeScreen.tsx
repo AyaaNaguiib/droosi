@@ -1,18 +1,38 @@
-import React from "react";
-import { FontAwesome } from "@expo/vector-icons";
-import {ActivityIndicator,FlatList,Image,Text,View,I18nManager,ScrollView,} from "react-native";
+import React, { useEffect } from "react";
+import {ActivityIndicator,FlatList,Image,Text,View,I18nManager,ScrollView,Button,Alert,} from "react-native";
 import styles from "./stacks/homeStyle";
 import { useInstructorsQuery } from "../../hooks/useQuery";
 import CustomBtn from "../components/btn/CustomBtn";
 import { useTranslation } from "react-i18next";
+import Star from "../../assets/images/Star.svg";
+import Location from "../../assets/images/Location.svg";
+import IdBadge from "../../assets/images/IdBadge.svg";
+import * as Notifications from "expo-notifications";
 
- import Star from "../../assets/images/Star.svg";
- import Location from "../../assets/images/Location.svg";
- import IdBadge from "../../assets/images/IdBadge.svg";
 
 export default function HomeScreen() {
   const { t } = useTranslation();
   const { data, isLoading, error } = useInstructorsQuery();
+
+
+  useEffect(() => {
+  const askNotificationPermission = async () => {
+    try {
+
+      const { status } = await Notifications.requestPermissionsAsync();
+
+      if (status === "granted") {
+        console.log("Notification permission allowed");
+      } else {
+        console.log("Notification permission denied");
+      }
+    } catch (err) {
+      console.log("Error requesting notification permission:", err);
+    }
+  };
+
+  askNotificationPermission();
+}, []);
 
   if (isLoading)
     return (
@@ -30,6 +50,7 @@ export default function HomeScreen() {
 
   return (
     <View style={styles.container}>
+
       <Text style={styles.header}>{t("Best Teachers")}</Text>
 
       <FlatList
@@ -43,7 +64,6 @@ export default function HomeScreen() {
         showsVerticalScrollIndicator={false}
         renderItem={({ item }) => (
           <View style={styles.card}>
-     
             <View style={styles.topSectionBox}>
               <View style={styles.topSection}>
                 <Image source={{ uri: item.image }} style={styles.teacherImage} />
@@ -55,15 +75,13 @@ export default function HomeScreen() {
                 >
                   <Text style={styles.teacherName}>{item.name}</Text>
                   <View style={styles.ratingRow}>
-                    {/* <FontAwesome name="star" size={14} color="#FFA828" /> */}
-                   <Star width={14}/>
+                    <Star width={14} />
                     <Text style={styles.ratingText}> {item.rate}</Text>
                   </View>
                 </View>
               </View>
             </View>
 
-         
             <ScrollView
               horizontal
               showsHorizontalScrollIndicator={false}
@@ -80,42 +98,29 @@ export default function HomeScreen() {
               )}
             </ScrollView>
 
-          
             <View style={styles.infoRow}>
-               <Location width={20} />
-              {/* <FontAwesome
-                name="map-marker"
-                size={14}
-                color="#414E75"
-                style={{ marginHorizontal: 4 }}
-              /> */}
+              <Location width={20} />
               <Text style={styles.location}>{item.location}</Text>
             </View>
 
-            
             <View style={styles.infoRow}>
-               <IdBadge width={20} />
-              {/* <FontAwesome
-                name="calendar"
-                size={14}
-                color="#414E75"
-                style={{ marginHorizontal: 4 }}
-              /> */}
-              <Text  style={{ color: "#414E75" }}>سعودي</Text>
+              <IdBadge width={20} />
+              <Text style={{ color: "#414E75" }}>سعودي</Text>
             </View>
 
-           <CustomBtn
-  title={t("Book Lesson")}
-  onPress={() => {}}
-  style={styles.bookBtn}
-  textStyle={styles.bookBtnText}
-/>
+            <CustomBtn
+              title={t("Book Lesson")}
+              onPress={() => {}}
+              style={styles.bookBtn}
+              textStyle={styles.bookBtnText}
+            />
           </View>
         )}
       />
     </View>
   );
 }
+
 
 
 

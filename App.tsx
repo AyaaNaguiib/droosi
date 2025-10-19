@@ -5,8 +5,8 @@ import Toast from 'react-native-toast-message';
 import './src/locals/i18n';
 import MainStack from './src/navigation/stacks/mainStack';
 
-const queryClient = new QueryClient();
 
+const queryClient = new QueryClient();
 export default function App() {
   return (
     <QueryClientProvider client={queryClient}>
@@ -15,5 +15,6 @@ export default function App() {
         <Toast />
       </NavigationContainer>
     </QueryClientProvider>
+  
   );
 }
