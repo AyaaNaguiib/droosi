@@ -12,34 +12,31 @@
       "supportsTablet": true
     },
     "android": {
-      "adaptiveIcon": { 
+      "adaptiveIcon": {
         "backgroundColor": "#E6F4FE"
       },
       "edgeToEdgeEnabled": true,
       "predictiveBackGestureEnabled": false,
       "package": "com.ayanaguib.newsExpo",
       "versionCode": 1,
-      "permissions": ["NOTIFICATIONS","POST_NOTIFICATIONS"],
+      "permissions": ["NOTIFICATIONS", "POST_NOTIFICATIONS"],
       "intentFilters": [
-    {
-      "action": "VIEW",
-      "data": {
-        "scheme": "https",
-        "host": "drossi.com",
-        "pathPrefix": "/article"
-      }
-    }
-  ]
-     
-
+        {
+          "action": "VIEW",
+          "data": {
+            "scheme": "https",
+            "host": "drossi.com",
+            "pathPrefix": "/article"
+          }
+        }
+      ]
     },
     "web": {
-      "output": "static",
+      "output": "single",
+
       "favicon": "./assets/images/favicon.png"
     },
     "plugins": [
-
-      "expo-router",
       [
         "expo-splash-screen",
         {
@@ -53,9 +50,13 @@
         }
       ],
       "expo-notifications",
-      
       "expo-localization",
-      "expo-font",
+      [
+        "expo-font",
+        {
+          "fonts": ["./assets/fonts/IBMPlexSansArabic-Bold.ttf"]
+        }
+      ],
       [
         "expo-build-properties",
         {
@@ -70,7 +71,6 @@
       "reactCompiler": true
     },
     "extra": {
-      "router": {},
       "eas": {
         "projectId": "ea6bad32-4bb9-480a-9127-0ccec70382fc"
       }
@@ -84,6 +84,3 @@
     }
   }
 }
-
-
-
