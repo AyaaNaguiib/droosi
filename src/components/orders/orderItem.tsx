@@ -2,6 +2,7 @@ import React from "react";
 import { View, Text } from "react-native";
 import { Icon } from "@/src/components/Icons";
 import { stylesk } from "@/src/screens/HomeScreen/stylesk";
+import { responsiveFontSize, responsiveWidth } from "react-native-responsive-dimensions";
 
 export const OrderItem = ({ item }) => {
   return (
@@ -12,10 +13,15 @@ export const OrderItem = ({ item }) => {
         <Text style={stylesk.orderNumber}>رقم الطلب #{item.orderNumber}</Text>
       </View>
       <View style={[stylesk.row, { alignItems: "center" }]}>
-        <View style={{ flexDirection: "row", alignItems: "center" }}>
-          
+        <View style={{ flexDirection: "row", alignItems: "center" }}> 
           <Text style={stylesk.date}>{item.date}</Text>
-          <Icon icon="calendar" style={{ marginRight: 6 }} />
+          <Icon
+            icon="calendar"
+            style={{
+              marginRight: responsiveWidth(1.5),
+            }}
+          />
+          {/* <Icon icon="calendar" style={{ marginRight: 6 }} /> */}
         </View>
 
         <Text

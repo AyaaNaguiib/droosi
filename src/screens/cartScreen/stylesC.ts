@@ -1,118 +1,118 @@
-import {StyleSheet } from "react-native";
+import { isTablet } from "@/src/utils/scaling";
+import { StyleSheet } from "react-native";
+import {responsiveWidth,responsiveHeight,responsiveFontSize,} from "react-native-responsive-dimensions";
+
 export const stylesC = StyleSheet.create({
-   container: { 
-    flex: 1, 
-    backgroundColor: "#FFFFFF", 
-    paddingTop: 50,
-    
+  container: {
+    flex: 1,
+    backgroundColor: "#FFFFFF",
+    paddingTop: responsiveHeight(6),
   },
   title: {
-    fontSize: 22,
+    fontSize: responsiveFontSize(2.6),
     fontWeight: "700",
     textAlign: "center",
     color: "#117A8B",
-    marginVertical: 16,
+    marginVertical: isTablet? responsiveHeight(4): responsiveHeight(2),
   },
   card: {
     flexDirection: "row",
     alignItems: "center",
     backgroundColor: "#E6F7F9",
-    borderRadius: 20,
-    padding: 10,
-    marginHorizontal:16,
+    borderRadius: responsiveWidth(5),
+    padding: responsiveWidth(3),
+    marginHorizontal: responsiveWidth(4),
   },
-  
   deleteButton: {
     backgroundColor: "#CE0043",
-    borderRadius: 8,
-    padding: 6,
+    borderRadius: responsiveWidth(2),
+    padding: responsiveWidth(1.8),
     justifyContent: "center",
-    marginRight: 8,
+    marginRight: responsiveWidth(2),
   },
- qtyContainer: {
+  qtyContainer: {
     flexDirection: "row",
     alignItems: "center",
     backgroundColor: "#FFFFFF66",
-    borderRadius: 8,
-    paddingHorizontal: 6,
-    paddingVertical: 4,
-
+    borderRadius: responsiveWidth(2),
+    paddingHorizontal: responsiveWidth(2),
+    paddingVertical: responsiveHeight(0.5),
   },
   qtyButton: {
-    width: 35,
-    height: 35,
-    borderRadius: 6,
+    width: responsiveWidth(9),
+    height: responsiveWidth(9),
+    borderRadius: responsiveWidth(2),
     backgroundColor: "#fff",
     justifyContent: "center",
     alignItems: "center",
     elevation: 2,
   },
   qtyText: {
-    fontSize: 20,
+    fontSize: responsiveFontSize(2.5),
     color: "#333",
     fontWeight: "600",
   },
   qtyNumber: {
-    fontSize: 18,
+    fontSize: responsiveFontSize(2.2),
     fontWeight: "500",
     color: "#333",
-    marginHorizontal: 8,
+    marginHorizontal: responsiveWidth(2),
   },
   infoContainer: {
     flex: 1,
-    marginHorizontal: 8,
+    marginHorizontal: responsiveWidth(2),
   },
   itemName: {
-    fontSize: 16,
+    fontSize: responsiveFontSize(2),
     textAlign: "right",
-    fontFamily:"IBMPlexSansArabic-Regular",
+    fontFamily: "IBMPlexSansArabic-Regular",
   },
   itemPrice: {
-    fontSize: 14,
+    fontSize: responsiveFontSize(1.9),
     color: "#289CA5",
     textAlign: "right",
-    fontFamily:"IBMPlexSansArabic-Regular",
+    fontFamily: "IBMPlexSansArabic-Regular",
   },
-
   bottomSection: {
     position: "absolute",
-    bottom: 25, 
+    bottom: responsiveHeight(3),
     left: 0,
     right: 0,
     backgroundColor: "#fff",
-    paddingHorizontal: 20,
-    paddingVertical: 10,
-    marginHorizontal:12
+    paddingHorizontal: responsiveWidth(5),
+    paddingVertical: responsiveHeight(1.5),
+    marginHorizontal: responsiveWidth(3),
   },
   totalRow: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    marginBottom: 10,
+    marginBottom: responsiveHeight(1),
   },
   totalLabel: {
-    fontSize: 16,
+    fontSize: responsiveFontSize(2),
     color: "#385052",
     fontWeight: "bold",
-    fontFamily:"IBMPlexSansArabic-Regular",
+    fontFamily: "IBMPlexSansArabic-Regular",
   },
   totalPrice: {
-    fontSize: 14,
+    fontSize: responsiveFontSize(1.9),
     color: "#289CA5",
     fontWeight: "bold",
-    fontFamily:"IBMPlexSansArabic-Regular",
+    fontFamily: "IBMPlexSansArabic-Regular",
   },
   payButton: {
     backgroundColor: "#289CA5",
-    borderRadius: 14,
-    paddingVertical: 14,
+    borderRadius: responsiveWidth(4),
+    paddingVertical: responsiveHeight(2),
     alignItems: "center",
   },
   payText: {
     color: "#fff",
-    fontSize: 16,
+    fontSize: responsiveFontSize(2),
     fontWeight: "700",
-    fontFamily:"IBMPlexSansArabic-Regular",
+    fontFamily: "IBMPlexSansArabic-Regular",
   },
 });
+
 

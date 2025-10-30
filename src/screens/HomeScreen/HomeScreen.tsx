@@ -1,10 +1,11 @@
 import React from "react";
-import { View, Text, StyleSheet, FlatList, TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet, FlatList, TouchableOpacity, Modal } from "react-native";
 import { stylesk } from "./stylesk";
 import { OrderItem } from "@/src/components/orders/orderItem";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { MainStackParamList } from "@/src/navigation/stacks/mainStack";
+import { isTablet } from "@/src/utils/scaling";
 
 type HomeScreenNavigationProp = NativeStackNavigationProp<MainStackParamList, "HomeScreen">;
 
@@ -66,31 +67,19 @@ return (
         keyExtractor={(item) => item.id}
         contentContainerStyle={{ paddingHorizontal: 16, paddingBottom: 20 }}
         showsVerticalScrollIndicator={false}
+       
       />
-      
-      <TouchableOpacity
-        style={styles.cartButton}
-        onPress={() => navigation.navigate("Cart")}
-      >
-        <Text style={styles.cartText}> عربة التسوق</Text>
-      </TouchableOpacity>
+          <View style={stylesk.bottomContainer}>
+        <TouchableOpacity
+          style={stylesk.cartButton}
+          onPress={() => navigation.navigate("Cart")}
+        >
+          <Text style={stylesk.cartText}>عربة التسوق</Text>
+        </TouchableOpacity>
+        
+      </View>
     </View>
   );
 }
-const styles = StyleSheet.create({
-  cartButton: {
-    position: "absolute",
-    bottom: 20,
-    left: 20,
-    right: 20,
-    backgroundColor: "black",
-    paddingVertical: 14,
-    borderRadius: 12,
-    alignItems: "center",
-  },
-  cartText: {
-    color: "white",
-    fontSize: 18,
-    fontWeight: "bold",
-  },
-});
+      
+
