@@ -94,7 +94,8 @@ export function Icon(props: IconProps) {
 // you can find all icons from this url https://fonts.google.com/icons?selected=Material+Icons+Outlined:account_circle:&icon.set=Material+Icons&icon.platform=ios
 export const iconRegistry = {
   calendar: require("../../assets/images/calendar.png"),
-  delete:("../../assets/images/deleteIcon.png")
+  delete:("../../assets/images/deleteIcon.png"),
+  bottomsheetIcon:("../../assets/images/bottomsheetIcon.png")
 }
 
 const $imageStyleBase: ImageStyle = {

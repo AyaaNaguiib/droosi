@@ -1,89 +1,97 @@
-import { isTablet, width } from "@/src/utils/scaling";
 import { StyleSheet } from "react-native";
-import { responsiveWidth, responsiveHeight, responsiveFontSize,} from "react-native-responsive-dimensions";
+import { width, isTablet, ms, mvs, msf } from "@/src/utils/scaling";
 
 export const stylesk = StyleSheet.create({
-  container: { 
-    flex: 1, 
-    backgroundColor: "#FFFFFF", 
-    paddingTop: responsiveHeight(6),
+  container: {
+    flex: 1,
+    backgroundColor: "#FFFFFF",
+    paddingTop: mvs(40),
   },
-  title: {
-    fontSize: responsiveFontSize(2.6),
-    fontWeight: "700",
-    marginBottom: responsiveHeight(2.5),
-    marginRight: responsiveWidth(4),
-    color: "#117A8B",
+
+  listContent: {
+    paddingHorizontal: ms(20),
+    paddingBottom: mvs(80),
   },
+
+  columnWrapper: {
+    justifyContent: "space-between",
+  },
+
   card: {
     backgroundColor: "#DFF1F3",
-    borderRadius: responsiveWidth(4),
-    padding: responsiveWidth(4),
-    marginBottom: responsiveHeight(1.8),
-    width: isTablet?width/2:width
+    borderRadius: ms(14),
+    padding: ms(16),
+    marginBottom: mvs(16),
+    width: isTablet ? width / 2.2 : "100%",
+    alignSelf: "center",
   },
+
   row: {
     flexDirection: "row",
     justifyContent: "space-between",
-    marginBottom: responsiveHeight(0.8),
+    marginBottom: mvs(8),
   },
-  price: { 
-    color: "#289CA5", 
-    fontSize: responsiveFontSize(2.2),
+
+  price: {
+    color: "#289CA5",
+    fontSize: msf(15),
     fontWeight: "600",
   },
-  orderNumber: { 
-    fontSize: responsiveFontSize(2),
-    color: "#385052", 
+
+  orderNumber: {
+    fontSize: msf(14),
+    color: "#385052",
     fontFamily: "IBMPlexSansArabic-Regular",
     fontWeight: "500",
   },
-  date: { 
-    fontSize: responsiveFontSize(1.8),
+
+  date: {
+    fontSize: msf(13),
     color: "#385052",
   },
+
   status: {
-    paddingVertical: responsiveHeight(0.7),
-    paddingHorizontal: responsiveWidth(3.5),
-    borderRadius: responsiveWidth(2),
-    fontSize: responsiveFontSize(1.9),
+    paddingVertical: mvs(5),
+    paddingHorizontal: ms(12),
+    borderRadius: ms(6),
+    fontSize: msf(13),
     fontFamily: "IBMPlexSansArabic-Bold",
   },
-  received: { 
+
+  received: {
     fontFamily: "IBMPlexSansArabic-Bold",
     backgroundColor: "#FFFFFF66",
     fontWeight: "700",
     color: "#289CA5",
     borderWidth: 1.5,
-    borderColor: "#289CA5", 
+    borderColor: "#289CA5",
   },
-  cancelled: { 
+
+  cancelled: {
     backgroundColor: "#FFFFFF66",
-    color: "#CE0043", 
-    borderWidth: 1.5, 
+    color: "#CE0043",
+    borderWidth: 1.5,
     borderColor: "#CE0043",
   },
 
-bottomContainer: {
-    paddingHorizontal: responsiveWidth(5), 
-    paddingBottom: responsiveHeight(2),
+  bottomContainer: {
+    paddingHorizontal: ms(20),
+    paddingBottom: mvs(20),
     backgroundColor: "white",
   },
 
   cartButton: {
     backgroundColor: "black",
-    paddingVertical: responsiveHeight(2), 
-    borderRadius: responsiveWidth(3), 
+    paddingVertical: mvs(14),
+    borderRadius: ms(10),
     alignItems: "center",
     justifyContent: "center",
-    width: "100%", 
+    width: "100%",
   },
 
   cartText: {
     color: "white",
-    fontSize: responsiveFontSize(2.2), 
+    fontSize: msf(15),
     fontWeight: "bold",
   },
 });
-
- 

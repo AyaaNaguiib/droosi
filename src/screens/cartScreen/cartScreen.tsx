@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { View, Text, FlatList, TouchableOpacity, Image, Modal, Dimensions } from "react-native";
+import { View, Text, FlatList, TouchableOpacity, Image, Modal, Dimensions,} from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import { stylesC } from "../cartScreen/stylesC";
+import { stylesC } from "../cartScreen/stylesC"; 
+import { isTablet } from "@/src/utils/scaling";
 
 const screenHeight = Dimensions.get("window").height;
 
@@ -39,7 +40,7 @@ export default function CartScreen() {
   };
 
   const confirmDeleteItem = (id) => {
-    setItemToDelete(id); 
+    setItemToDelete(id);
     setIsDeleteModalVisible(true);
   };
 
@@ -51,12 +52,8 @@ export default function CartScreen() {
     }
   };
 
-  const getTotal = () => {
-    return cartItems.reduce(
-      (total, item) => total + item.price * item.quantity,
-      0
-    );
-  };
+  const getTotal = () =>
+    cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
 
   const renderItem = ({ item }) => (
     <View style={stylesC.card}>
@@ -64,7 +61,7 @@ export default function CartScreen() {
         onPress={() => confirmDeleteItem(item.id)}
         style={stylesC.deleteButton}
       >
-        <Ionicons name="trash" size={20} color="#FFFFFF" />
+        <Ionicons name="trash" size={isTablet ? 30 : 20} color="#FFFFFF" />
       </TouchableOpacity>
 
       <View style={stylesC.qtyContainer}>
@@ -96,144 +93,79 @@ export default function CartScreen() {
 
   return (
     <>
-      <View style={{ flex: 1 }}>
-        <View style={stylesC.container}>
-          <Text style={stylesC.title}>عربة التسوق</Text>
-          <FlatList
-            data={cartItems}
-            renderItem={renderItem}
-            keyExtractor={(item) => item.id}
-            contentContainerStyle={{ paddingBottom: 150 }}
-          />
-        </View>
+      <View style={stylesC.container}>
+        <Text style={stylesC.title}>عربة التسوق</Text>
 
-        <View style={stylesC.bottomSection}>
-          <View style={stylesC.totalRow}>
-            <Text style={stylesC.totalPrice}>{getTotal()} ريال</Text>
-            <Text style={stylesC.totalLabel}>الإجمالي</Text>
-          </View>
-
-          <TouchableOpacity
-            style={stylesC.payButton}
-            onPress={() => setIsModalVisible(true)}
-          >
-            <Text style={stylesC.payText}>متابعة دفع{getTotal()} ريال</Text>
-          </TouchableOpacity>
-        </View>
+        <FlatList
+          data={cartItems}
+          renderItem={renderItem}
+          keyExtractor={(item) => item.id}
+          contentContainerStyle={{ paddingBottom: 150 }}
+        />
       </View>
 
-      <Modal
-        transparent
-        visible={isModalVisible}
-        onRequestClose={() => setIsModalVisible(false)}
-      >
+      <View style={stylesC.bottomSection}>
+        <View style={stylesC.totalRow}>
+          <Text style={stylesC.totalPrice}>{getTotal()} ريال</Text>
+          <Text style={stylesC.totalLabel}>الإجمالي</Text>
+        </View>
+
+        <TouchableOpacity
+          style={stylesC.payButton}
+          onPress={() => setIsModalVisible(true)}
+        >
+          <Text style={stylesC.payText}>متابعة دفع {getTotal()} ريال</Text>
+        </TouchableOpacity>
+      </View>
+
+  
+      <Modal transparent visible={isModalVisible} onRequestClose={() => setIsModalVisible(false)}>
         <TouchableOpacity
           activeOpacity={1}
-          style={{
-            flex: 1,
-            backgroundColor: "rgba(0,0,0,0.4)",
-          }}
+          style={stylesC.overlay}
           onPress={() => setIsModalVisible(false)}
         />
 
-        <View
-          style={{
-            position: "absolute",
-            left: 0,
-            right: 0,
-            bottom: 0,
-            height: screenHeight / 2,
-            backgroundColor: "#FFFFFF",
-            borderTopLeftRadius: 25,
-            borderTopRightRadius: 25,
-            padding: 20,
-          }}
-        >
-          <Text
-            style={{
-              fontSize: 20,
-              fontWeight: "bold",
-              marginBottom: 15,
-              textAlign: "center",
-            }}
-          >
-            تم الدفع بنجاح
-          </Text>
+        <View style={stylesC.paymentModal}>
+          <View style={stylesC.paymentContent}>
+            <View style={stylesC.checkIconContainer}>
+              <Ionicons name="checkmark-circle" size={isTablet ? 80 : 60} color="#082375" />
+            </View>
+
+            <Text style={stylesC.paymentTitle}>تم الدفع بنجاح</Text>
+            <Text style={stylesC.paymentSubtitle}>
+              شكراً لطلبك! تم تأكيد عملية الدفع بنجاح.
+            </Text>
+          </View>
 
           <TouchableOpacity
-            style={{
-              marginTop: 30,
-              backgroundColor: "#082375",
-              paddingVertical: 12,
-              borderRadius: 10,
-              alignItems: "center",
-            }}
+            style={stylesC.closeButton}
             onPress={() => setIsModalVisible(false)}
           >
-            <Text style={{ color: "#fff", fontSize: 16 }}>إغلاق</Text>
+            <Text style={stylesC.closeButtonText}>إغلاق</Text>
           </TouchableOpacity>
         </View>
       </Modal>
 
-  
+   
       <Modal
         transparent
         visible={isDeleteModalVisible}
         onRequestClose={() => setIsDeleteModalVisible(false)}
       >
-        <View
-          style={{
-            flex: 1,
-            backgroundColor: "rgba(0,0,0,0.4)",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          <View
-            style={{
-              width: "70%",
-              backgroundColor: "#fff",
-              borderRadius: 20,
-              padding: 25,
-              alignItems: "center",
-            }}
-          >
-            <Text
-              style={{
-                fontSize: 18,
-                fontWeight: "bold",
-                marginBottom: 15,
-                textAlign: "center",
-              }}
-            >
-              هل تريد حذف العنصر؟
-            </Text>
-
-            <View style={{ flexDirection: "row", marginTop: 10 }}>
-              <TouchableOpacity
-                style={{
-                  backgroundColor: "red",
-                  paddingVertical: 10,
-                  paddingHorizontal: 25,
-                  borderRadius: 8,
-                  marginHorizontal: 10,
-                }}
-                onPress={removeItem}
-              >
-                <Text style={{ color: "#fff", fontSize: 16 }}>نعم</Text>
+        <View style={stylesC.deleteOverlay}>
+          <View style={stylesC.deleteBox}>
+            <Text style={stylesC.deleteText}>هل تريد حذف العنصر؟</Text>
+            <View style={stylesC.deleteBtns}>
+              <TouchableOpacity style={stylesC.deleteYes} onPress={removeItem}>
+                <Text style={stylesC.deleteBtnText}>نعم</Text>
               </TouchableOpacity>
 
               <TouchableOpacity
-                style={{
-                  backgroundColor: "grey",
-                  paddingVertical: 10,
-                  paddingHorizontal: 25,
-                  borderRadius: 8,
-                  marginHorizontal: 10,
-                }}
+                style={stylesC.deleteNo}
                 onPress={() => setIsDeleteModalVisible(false)}
               >
-                <Text style={{ color: "#fff", fontSize: 16 }}>لا</Text>
+                <Text style={stylesC.deleteBtnText}>لا</Text>
               </TouchableOpacity>
             </View>
           </View>
@@ -242,5 +174,3 @@ export default function CartScreen() {
     </>
   );
 }
-
-
