@@ -1,31 +1,33 @@
 import { StyleSheet } from "react-native";
 import {responsiveWidth,responsiveHeight,responsiveFontSize,} from "react-native-responsive-dimensions";
 import { isTablet } from "@/src/utils/scaling";
+import { COLORS } from "@/src/constants/colors";
+
 
 export const stylesC = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#FFFFFF",
+    backgroundColor: COLORS.white,
     paddingTop: responsiveHeight(isTablet ? 4 : 6),
   },
   title: {
     fontSize: responsiveFontSize(isTablet ? 3 : 2.6),
     fontWeight: "700",
     textAlign: "center",
-    color: "#117A8B",
+    color: COLORS.secondary,
     marginVertical: responsiveHeight(isTablet ? 4 : 2),
   },
   card: {
     flexDirection: "row",
     alignItems: "center",
-    backgroundColor: "#E6F7F9",
+    backgroundColor: COLORS.lightBackground,
     borderRadius: responsiveWidth(5),
     padding: responsiveWidth(3),
     marginHorizontal: responsiveWidth(4),
     marginVertical: responsiveHeight(isTablet ? 1.5 : 1),
   },
   deleteButton: {
-    backgroundColor: "red",
+    backgroundColor: COLORS.red,
     borderRadius: responsiveWidth(2),
     padding: responsiveWidth(isTablet ? 2.5 : 2),
     justifyContent: "center",
@@ -34,7 +36,7 @@ export const stylesC = StyleSheet.create({
   qtyContainer: {
     flexDirection: "row",
     alignItems: "center",
-    backgroundColor: "#FFFFFF66",
+    backgroundColor: COLORS.lightWhite,
     borderRadius: responsiveWidth(2),
     paddingHorizontal: responsiveWidth(2),
     paddingVertical: responsiveHeight(0.5),
@@ -43,20 +45,20 @@ export const stylesC = StyleSheet.create({
     width: responsiveWidth(isTablet ? 6 : 8),
     height: responsiveWidth(isTablet ? 6 : 8),
     borderRadius: responsiveWidth(2),
-    backgroundColor: "#fff",
+    backgroundColor: COLORS.white,
     justifyContent: "center",
     alignItems: "center",
     elevation: 2,
   },
   qtyText: {
     fontSize: responsiveFontSize(isTablet ? 3 : 2.5),
-    color: "#333",
+    color: COLORS.textDark,
     fontWeight: "600",
   },
   qtyNumber: {
     fontSize: responsiveFontSize(isTablet ? 2.4 : 2),
     fontWeight: "500",
-    color: "#333",
+    color: COLORS.textDark,
     marginHorizontal: responsiveWidth(2),
   },
   infoContainer: {
@@ -70,7 +72,7 @@ export const stylesC = StyleSheet.create({
   },
   itemPrice: {
     fontSize: responsiveFontSize(isTablet ? 2.5 : 2),
-    color: "#289CA5",
+    color:COLORS.primary,
     textAlign: "right",
     fontFamily: "IBMPlexSansArabic-Regular",
   },
@@ -84,7 +86,7 @@ export const stylesC = StyleSheet.create({
     bottom: responsiveHeight(3),
     left: 0,
     right: 0,
-    backgroundColor: "#fff",
+    backgroundColor: COLORS.white,
     paddingHorizontal: responsiveWidth(5),
     paddingVertical: responsiveHeight(1.5),
   },
@@ -96,22 +98,22 @@ export const stylesC = StyleSheet.create({
   },
   totalLabel: {
     fontSize: responsiveFontSize(2),
-    color: "#385052",
+    color: COLORS.textGray,
     fontWeight: "bold",
   },
   totalPrice: {
     fontSize: responsiveFontSize(1.9),
-    color: "#289CA5",
+    color: COLORS.primary,
     fontWeight: "bold",
   },
   payButton: {
-    backgroundColor: "#289CA5",
+    backgroundColor: COLORS.primary,
     borderRadius: responsiveWidth(4),
     paddingVertical: responsiveHeight(isTablet ? 2.2 : 2),
     alignItems: "center",
   },
   payText: {
-    color: "#fff",
+    color: COLORS.white,
     fontSize: responsiveFontSize(isTablet ? 2.3 : 2),
     fontWeight: "700",
   },
@@ -119,7 +121,7 @@ export const stylesC = StyleSheet.create({
  
   overlay: {
     flex: 1,
-    backgroundColor: "rgba(0,0,0,0.4)",
+    backgroundColor:COLORS.overlay,
   },
   paymentModal: {
     position: "absolute",
@@ -127,7 +129,7 @@ export const stylesC = StyleSheet.create({
     right: 0,
     bottom: 0,
     height: responsiveHeight(isTablet ? 65 : 50),
-    backgroundColor: "#FFFFFF",
+    backgroundColor: COLORS.white,
     borderTopLeftRadius: 25,
     borderTopRightRadius: 25,
     padding: responsiveWidth(5),
@@ -142,7 +144,7 @@ export const stylesC = StyleSheet.create({
     width: responsiveWidth(isTablet ? 10 : 18),
     height: responsiveWidth(isTablet ? 10 : 18),
     borderRadius: "100%",
-    backgroundColor: "#E8F0FF",
+    backgroundColor: COLORS.successBackground,
     justifyContent: "center",
     alignItems: "center",
     marginBottom: responsiveHeight(2),
@@ -162,26 +164,26 @@ export const stylesC = StyleSheet.create({
     textAlign: "center",
   },
   closeButton: {
-    backgroundColor: "#082375",
+    backgroundColor: COLORS.darkBlue,
     paddingVertical: responsiveHeight(isTablet ? 2 : 1.6),
     borderRadius: 10,
     alignItems: "center",
   },
   closeButtonText: {
-    color: "#fff",
+    color: COLORS.white,
     fontSize: responsiveFontSize(isTablet ? 2.3 : 1.9),
   },
 
 
   deleteOverlay: {
     flex: 1,
-    backgroundColor: "rgba(0,0,0,0.4)",
+    backgroundColor: COLORS.overlay,
     justifyContent: "center",
     alignItems: "center",
   },
   deleteBox: {
     width: "70%",
-    backgroundColor: "#fff",
+    backgroundColor: COLORS.white,
     borderRadius: 20,
     padding: responsiveWidth(5),
     alignItems: "center",
@@ -197,7 +199,7 @@ export const stylesC = StyleSheet.create({
     marginTop: responsiveHeight(1),
   },
   deleteYes: {
-    backgroundColor: "red",
+    backgroundColor: COLORS.red,
     paddingVertical: responsiveHeight(1.2),
     paddingHorizontal: responsiveWidth(6),
     borderRadius: 8,
@@ -211,7 +213,7 @@ export const stylesC = StyleSheet.create({
     marginHorizontal: responsiveWidth(2),
   },
   deleteBtnText: {
-    color: "#fff",
+    color: COLORS.white,
     fontSize: responsiveFontSize(isTablet ? 2.2 : 1.9),
   },
 });

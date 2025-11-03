@@ -1,10 +1,11 @@
 import { StyleSheet } from "react-native";
 import { width, isTablet, ms, mvs, msf } from "@/src/utils/scaling";
+import { COLORS } from "@/src/constants/colors";
 
 export const stylesk = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#FFFFFF",
+    backgroundColor: COLORS.white,
     paddingTop: mvs(40),
   },
 
@@ -18,7 +19,7 @@ export const stylesk = StyleSheet.create({
   },
 
   card: {
-    backgroundColor: "#DFF1F3",
+    backgroundColor: COLORS.listCard,
     borderRadius: ms(14),
     padding: ms(16),
     marginBottom: mvs(16),
@@ -33,21 +34,21 @@ export const stylesk = StyleSheet.create({
   },
 
   price: {
-    color: "#289CA5",
+    color: COLORS.primary,
     fontSize: msf(15),
     fontWeight: "600",
   },
 
   orderNumber: {
     fontSize: msf(14),
-    color: "#385052",
+    color: COLORS.textGray,
     fontFamily: "IBMPlexSansArabic-Regular",
     fontWeight: "500",
   },
 
   date: {
     fontSize: msf(13),
-    color: "#385052",
+    color: COLORS.date,
   },
 
   status: {
@@ -60,28 +61,28 @@ export const stylesk = StyleSheet.create({
 
   received: {
     fontFamily: "IBMPlexSansArabic-Bold",
-    backgroundColor: "#FFFFFF66",
+    backgroundColor: COLORS.lightWhite,
     fontWeight: "700",
-    color: "#289CA5",
+    color: COLORS.primary,
     borderWidth: 1.5,
-    borderColor: "#289CA5",
+    borderColor: COLORS.primary,
   },
 
   cancelled: {
-    backgroundColor: "#FFFFFF66",
-    color: "#CE0043",
+    backgroundColor: COLORS.lightWhite,
+    color: COLORS.lightRed,
     borderWidth: 1.5,
-    borderColor: "#CE0043",
+    borderColor:COLORS.lightRed,
   },
 
   bottomContainer: {
     paddingHorizontal: ms(20),
     paddingBottom: mvs(20),
-    backgroundColor: "white",
+    backgroundColor:COLORS.white,
   },
 
   cartButton: {
-    backgroundColor: "black",
+    backgroundColor: COLORS.black,
     paddingVertical: mvs(14),
     borderRadius: ms(10),
     alignItems: "center",
@@ -90,7 +91,7 @@ export const stylesk = StyleSheet.create({
   },
 
   cartText: {
-    color: "white",
+    color: COLORS.white,
     fontSize: msf(15),
     fontWeight: "bold",
   },

@@ -1,8 +1,11 @@
 import React, { useState } from "react";
-import { View, Text, FlatList, TouchableOpacity, Image, Modal, Dimensions,} from "react-native";
+import {View,Text,FlatList,TouchableOpacity,Image,Dimensions,} from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import { stylesC } from "../cartScreen/stylesC"; 
+import { stylesC } from "../cartScreen/stylesC";
 import { isTablet } from "@/src/utils/scaling";
+import CustomModal from "../../components/modal/CustomModal"; 
+import { COLORS } from "@/src/constants/colors";
+
 
 const screenHeight = Dimensions.get("window").height;
 
@@ -61,7 +64,7 @@ export default function CartScreen() {
         onPress={() => confirmDeleteItem(item.id)}
         style={stylesC.deleteButton}
       >
-        <Ionicons name="trash" size={isTablet ? 30 : 20} color="#FFFFFF" />
+        <Ionicons name="trash" size={isTablet ? 30 : 20} color={COLORS.white}/>
       </TouchableOpacity>
 
       <View style={stylesC.qtyContainer}>
@@ -118,59 +121,22 @@ export default function CartScreen() {
         </TouchableOpacity>
       </View>
 
-  
-      <Modal transparent visible={isModalVisible} onRequestClose={() => setIsModalVisible(false)}>
-        <TouchableOpacity
-          activeOpacity={1}
-          style={stylesC.overlay}
-          onPress={() => setIsModalVisible(false)}
+      <CustomModal
+        visible={isModalVisible}
+        onClose={() => setIsModalVisible(false)}
+        type="payment"
+        stylesC={stylesC}
+        isTablet={isTablet} onConfirmDelete={undefined}      
         />
 
-        <View style={stylesC.paymentModal}>
-          <View style={stylesC.paymentContent}>
-            <View style={stylesC.checkIconContainer}>
-              <Ionicons name="checkmark-circle" size={isTablet ? 80 : 60} color="#082375" />
-            </View>
-
-            <Text style={stylesC.paymentTitle}>تم الدفع بنجاح</Text>
-            <Text style={stylesC.paymentSubtitle}>
-              شكراً لطلبك! تم تأكيد عملية الدفع بنجاح.
-            </Text>
-          </View>
-
-          <TouchableOpacity
-            style={stylesC.closeButton}
-            onPress={() => setIsModalVisible(false)}
-          >
-            <Text style={stylesC.closeButtonText}>إغلاق</Text>
-          </TouchableOpacity>
-        </View>
-      </Modal>
-
-   
-      <Modal
-        transparent
+      <CustomModal
         visible={isDeleteModalVisible}
-        onRequestClose={() => setIsDeleteModalVisible(false)}
-      >
-        <View style={stylesC.deleteOverlay}>
-          <View style={stylesC.deleteBox}>
-            <Text style={stylesC.deleteText}>هل تريد حذف العنصر؟</Text>
-            <View style={stylesC.deleteBtns}>
-              <TouchableOpacity style={stylesC.deleteYes} onPress={removeItem}>
-                <Text style={stylesC.deleteBtnText}>نعم</Text>
-              </TouchableOpacity>
-
-              <TouchableOpacity
-                style={stylesC.deleteNo}
-                onPress={() => setIsDeleteModalVisible(false)}
-              >
-                <Text style={stylesC.deleteBtnText}>لا</Text>
-              </TouchableOpacity>
-            </View>
-          </View>
-        </View>
-      </Modal>
+        onClose={() => setIsDeleteModalVisible(false)}
+        type="delete"
+        onConfirmDelete={removeItem}
+        stylesC={stylesC}
+        isTablet={isTablet}
+      />
     </>
   );
 }
