@@ -13,7 +13,7 @@ export const OrderItem = ({ item }) => {
         <Text style={stylesk.orderNumber}>رقم الطلب #{item.orderNumber}</Text>
       </View>
       <View style={[stylesk.row, { alignItems: "center" }]}>
-        <View style={{ flexDirection: "row", alignItems: "center" }}> 
+        <View style={{ flexDirection: "row-reverse", alignItems: "center" }}> 
           <Text style={stylesk.date}>{item.date}</Text>
           <Icon
             icon="calendar"

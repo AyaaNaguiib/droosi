@@ -5,6 +5,13 @@
   "Enter your mobile number": "Enter your mobile number",
   "Enter your password": "Enter your password",
   "Best Teachers": "Our Best Teachers",
-  "Book Lesson": "Book a lesson"
+  "Book Lesson": "Book a lesson",
+  "Cart Shopping" : "Cart Shopping",
+  "Total": "Total",
+  "countinueToPay" :"countinue to pay{{price}} SAR",
+  "Riyal" :"SAR",
+  "DeleteItem": "Delete Item",
+  "orangeJuice": "Orange Juice"
+
 }
 

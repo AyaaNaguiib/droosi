@@ -1,11 +1,11 @@
 import React from "react";
 import { View, Text, FlatList, TouchableOpacity } from "react-native";
-import { stylesk } from "./stylesk";
 import { OrderItem } from "@/src/components/orders/orderItem";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { MainStackParamList } from "@/src/navigation/stacks/mainStack";
 import { isTablet } from "@/src/utils/scaling";
+import { stylesk } from "./stylesk";
 
 type HomeScreenNavigationProp = NativeStackNavigationProp<MainStackParamList,"HomeScreen">;
 
@@ -83,3 +83,5 @@ export default function HomeScreen() {
     </View>
   );
 }
+
+

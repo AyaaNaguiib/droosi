@@ -28,7 +28,7 @@ export const stylesk = StyleSheet.create({
   },
 
   row: {
-    flexDirection: "row",
+    flexDirection: "row-reverse",
     justifyContent: "space-between",
     marginBottom: mvs(8),
   },
