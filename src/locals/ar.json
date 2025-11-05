@@ -11,6 +11,15 @@
   "countinueToPay" :"متابعه الدفع {{price}}ريال",
     "Riyal" :"ريال",
   "DeleteItem": "حذف العنصر",
-  "orangeJuice": "عصير برتقال"
+  "orangeJuice": "عصير برتقال",
+
+  
+  "paymentSuccessTitle": "تم الدفع بنجاح",
+  "paymentSuccessMessage": "شكراً لطلبك! تم تأكيد عملية الدفع بنجاح.",
+  "close": "إغلاق",
+  "confirmDeleteMessage": "هل تريد حذف العنصر؟",
+  "yes": "نعم",
+  "no": "لا"
+
 }
 

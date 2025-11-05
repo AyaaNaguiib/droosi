@@ -1,17 +1,17 @@
-import { Ionicons } from "@expo/vector-icons";
 import React, { useState } from "react";
-import { Dimensions, FlatList, Image, StyleSheet, Text, TouchableOpacity, View,} from "react-native";
-
+import { Dimensions, FlatList, Image,StyleSheet,Text,TouchableOpacity,View,I18nManager,} from "react-native";
+import { Ionicons } from "@expo/vector-icons";
 import { COLORS } from "@/src/constants/colors";
 import { isTablet, ms, msf, mvs } from "@/src/utils/scaling";
-import CustomModal from "../../components/modal/CustomModal";
-
+import { useTranslation } from "react-i18next";
+import { changeAppLanguage } from "@/src/locals/i18n";
+import BottomSheetModal from "@/src/components/modal/BottomSheetModal";
+import PopupModal from "@/src/components/modal/PopUp";
 
 const screenHeight = Dimensions.get("window").height;
 
 export default function CartScreen() {
-  // const { t } = useTranslation();
-
+  const { t, i18n } = useTranslation();
   const [cartItems, setCartItems] = useState([
     {
       id: "1",
@@ -21,17 +21,26 @@ export default function CartScreen() {
       quantity: 1,
     },
   ]);
+  React.useEffect(() => {
+    const isRTL = i18n.language === "ar";
+    if (I18nManager.isRTL !== isRTL) {
+      I18nManager.forceRTL(isRTL);
+    }
+  }, [i18n.language]);
 
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false);
   const [itemToDelete, setItemToDelete] = useState(null);
 
+  const toggleLang = async () => {
+    const newLang = i18n.language === "ar" ? "en" : "ar";
+    await changeAppLanguage(newLang);
+  };
+
   const increaseQty = (id) => {
     setCartItems((prev) =>
       prev.map((item) =>
-        item.id === id
-          ? { ...item, quantity: item.quantity + 1 }
-          : item
+        item.id === id ? { ...item, quantity: item.quantity + 1 } : item
       )
     );
   };
@@ -53,69 +62,83 @@ export default function CartScreen() {
 
   const removeItem = () => {
     if (itemToDelete) {
-      setCartItems((prev) =>
-        prev.filter((item) => item.id !== itemToDelete)
-      );
+      setCartItems((prev) => prev.filter((item) => item.id !== itemToDelete));
       setItemToDelete(null);
       setIsDeleteModalVisible(false);
     }
   };
 
   const getTotal = () =>
-    cartItems.reduce(
-      (total, item) => total + item.price * item.quantity,
-      0
-    );
+    cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
 
-  const renderItem = ({ item }) => (
-    <View style={stylesC.$card}>
-      <TouchableOpacity
-        onPress={() => confirmDeleteItem(item.id)}
-        style={stylesC.$deleteButton}
+  const renderItem = ({ item }) => {
+    const isRTL = i18n.language === "ar";
+    return (
+      <View
+        style={[
+          stylesC.$card,
+          { flexDirection: isRTL ? "row-reverse" : "row" },
+        ]}
       >
-        <Ionicons
-          name="trash"
-          size={isTablet ? 30 : 20}
-          color={COLORS.white}
-        />
-      </TouchableOpacity>
-
-      <View style={stylesC.$qtyContainer}>
         <TouchableOpacity
-          style={stylesC.$qtyButton}
-          onPress={() => increaseQty(item.id)}
+          onPress={() => confirmDeleteItem(item.id)}
+          style={[
+            stylesC.$deleteButton,
+            isRTL ? { marginLeft: ms(8) } : { marginRight: ms(8) },
+          ]}
         >
-          <Text style={stylesC.$qtyText}>+</Text>
+          <Ionicons
+            name="trash"
+            size={isTablet ? 30 : 20}
+            color={COLORS.white}
+          />
         </TouchableOpacity>
 
-        <Text style={stylesC.$qtyNumber}>{item.quantity}</Text>
+        <View style={stylesC.$qtyContainer}>
+          <TouchableOpacity
+            style={stylesC.$qtyButton}
+            onPress={() => increaseQty(item.id)}
+          >
+            <Text style={stylesC.$qtyText}>+</Text>
+          </TouchableOpacity>
 
-        <TouchableOpacity
-          style={stylesC.$qtyButton}
-          onPress={() => decreaseQty(item.id)}
-        >
-          <Text style={stylesC.$qtyText}>-</Text>
-        </TouchableOpacity>
+          <Text style={stylesC.$qtyNumber}>{item.quantity}</Text>
+
+          <TouchableOpacity
+            style={stylesC.$qtyButton}
+            onPress={() => decreaseQty(item.id)}
+          >
+            <Text style={stylesC.$qtyText}>-</Text>
+          </TouchableOpacity>
+        </View>
+
+        <View style={stylesC.$infoContainer}>
+          <Text style={stylesC.$itemName}>{item.name}</Text>
+          <Text style={stylesC.$itemPrice}>
+            {item.price} {t("Riyal")}
+          </Text>
+        </View>
+
+        <Image source={item.image} style={stylesC.$itemImage} />
       </View>
+    );
+  };
 
-      <View style={stylesC.$infoContainer}>
-        <Text style={stylesC.$itemName}>{item.name}</Text>
-        <Text style={stylesC.$itemPrice}>
-          {item.price} ريال
-        </Text>
-      </View>
-
-      <Image
-        source={item.image}
-        style={stylesC.$itemImage}
-      />
-    </View>
-  );
+  const isRTL = i18n.language === "ar";
 
   return (
     <>
       <View style={stylesC.$container}>
-        <Text style={stylesC.$title}>عربة التسوق</Text>
+     <View style={{ alignItems: "center", marginTop: mvs(10) }}>
+  <Text style={stylesC.$title}>{t("Cart Shopping")}</Text>
+
+  <TouchableOpacity
+    onPress={toggleLang}
+    style={[stylesC.$langButton, { position: "absolute", top: 0, end: 20 }]} 
+  >
+    <Text style={stylesC.$langButtonText}>{isRTL ? "EN" : "ع"}</Text>
+  </TouchableOpacity>
+</View>
 
         <FlatList
           data={cartItems}
@@ -126,13 +149,16 @@ export default function CartScreen() {
       </View>
 
       <View style={stylesC.$bottomSection}>
-        <View style={stylesC.$totalRow}>
+        <View
+          style={[
+            stylesC.$totalRow,
+            { flexDirection: isRTL ? "row-reverse" : "row" },
+          ]}
+        >
           <Text style={stylesC.$totalPrice}>
-            {getTotal()} ريال
+            {getTotal()} {t("Riyal")}
           </Text>
-          <Text style={stylesC.$totalLabel}>
-            الاجمالي
-          </Text>
+          <Text style={stylesC.$totalLabel}>{t("Total")}</Text>
         </View>
 
         <TouchableOpacity
@@ -140,67 +166,59 @@ export default function CartScreen() {
           onPress={() => setIsModalVisible(true)}
         >
           <Text style={stylesC.$payText}>
-            متابعه الدفع
+            {t("countinueToPay", { price: getTotal() })}
           </Text>
         </TouchableOpacity>
       </View>
 
-      <CustomModal
+      <BottomSheetModal
         visible={isModalVisible}
         onClose={() => setIsModalVisible(false)}
-        type="payment"
-        stylesC={stylesC}
+       
         isTablet={isTablet}
-        onConfirmDelete={undefined}
-      />
+        />
 
-      <CustomModal
+      <PopupModal
         visible={isDeleteModalVisible}
         onClose={() => setIsDeleteModalVisible(false)}
-        type="delete"
         onConfirmDelete={removeItem}
-        stylesC={stylesC}
-        isTablet={isTablet}
+        isRTL={false}   
       />
     </>
   );
 }
 
-
-export const stylesC = StyleSheet.create({
+const stylesC = StyleSheet.create({
   $container: {
     flex: 1,
     backgroundColor: COLORS.white,
     paddingTop: mvs(isTablet ? 28 : 42),
-  },
-  $simpleLangButton: {
-    alignSelf: "flex-end",
-    margin: ms(16),
-    paddingVertical: mvs(6),
-    paddingHorizontal: ms(12),
-    borderRadius: ms(8),
-    backgroundColor: COLORS.primary,
-  },
-  $simpleLangText: {
-    color: COLORS.white,
-    fontSize: msf(isTablet ? 18 : 14),
-    fontFamily: "IBMPlexSansArabic-Medium",
+   
   },
   $title: {
-    flexDirection: "row-reverse",
     fontSize: msf(isTablet ? 24 : 18),
     fontWeight: "700",
-    textAlign: "center",
     color: COLORS.secondary,
-    marginVertical: mvs(isTablet ? 32 : 16),
+   textAlign: "center",
+  },
+  $langButton: {
+    backgroundColor: COLORS.primary,
+    borderRadius: 12,
+    paddingVertical: 6,
+    paddingHorizontal: 12,
+  },
+  $langButtonText: {
+    color: COLORS.white,
+    fontWeight: "700",
   },
   $card: {
-    flexDirection: "row-reverse",
+    flexDirection: I18nManager.isRTL ? "row-reverse" : "row",
+    // flexDirection: "row-reverse",
     alignItems: "center",
     backgroundColor: COLORS.lightBackground,
     borderRadius: ms(20),
     padding: ms(12),
-    marginHorizontal: ms(16),
+    marginHorizontal: ms(10),
     marginVertical: mvs(isTablet ? 10 : 8),
   },
   $deleteButton: {
@@ -211,7 +229,7 @@ export const stylesC = StyleSheet.create({
     marginRight: ms(8),
   },
   $qtyContainer: {
-    flexDirection: "row",
+    flexDirection: "row-reverse",
     alignItems: "center",
     backgroundColor: COLORS.lightWhite,
     borderRadius: ms(8),
@@ -266,9 +284,11 @@ export const stylesC = StyleSheet.create({
     backgroundColor: COLORS.white,
     paddingHorizontal: ms(20),
     paddingVertical: mvs(10),
+    borderTopWidth: 1,
+    borderColor: COLORS.white,
   },
   $totalRow: {
-    flexDirection: "row-reverse",
+    flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
     marginBottom: mvs(8),

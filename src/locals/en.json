@@ -11,7 +11,15 @@
   "countinueToPay" :"countinue to pay{{price}} SAR",
   "Riyal" :"SAR",
   "DeleteItem": "Delete Item",
-  "orangeJuice": "Orange Juice"
+  "orangeJuice": "Orange Juice",
+
+
+   "paymentSuccessTitle": "Payment Successful",
+  "paymentSuccessMessage": "Thank you for your order! Your payment has been confirmed.",
+  "close": "Close",
+  "confirmDeleteMessage": "Do you want to delete this item?",
+  "yes": "Yes",
+  "no": "No"
 
 }
 
